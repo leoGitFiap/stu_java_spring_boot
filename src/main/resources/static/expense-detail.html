@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Buscar gasto | Controlador de Gastos</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="module" src="js/expense-detail.js"></script>
+</head>
+<body>
+    <header>
+        <p class="logo">Controlador de Gastos</p>
+        <nav>
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="expenses.html">Gastos</a></li>
+                <li><a href="expense-form.html">Novo gasto</a></li>
+                <li><a href="expense-detail.html" aria-current="page">Buscar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Buscar gasto</h1>
+
+        <div id="feedback" role="status"></div>
+
+        <form id="search-form">
+            <label for="expense-id">ID do gasto</label>
+            <input type="number" id="expense-id" name="id" min="1" required>
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </form>
+
+        <section id="expense-detail" class="card" aria-label="Detalhes do gasto" hidden></section>
+    </main>
+
+    <footer>
+        <p>Controlador de Gastos</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gastos | Controlador de Gastos</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="module" src="js/expenses.js"></script>
+</head>
+<body>
+    <header>
+        <p class="logo">Controlador de Gastos</p>
+        <nav>
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="expenses.html" aria-current="page">Gastos</a></li>
+                <li><a href="expense-form.html">Novo gasto</a></li>
+                <li><a href="expense-detail.html">Buscar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Gastos</h1>
+
+        <div id="feedback" role="status"></div>
+
+        <div class="table-wrapper">
+            <table id="expenses-table" class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Categoria</th>
+                        <th scope="col">Data</th>
+                        <th scope="col">Valor</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <p>Total: <strong id="expenses-total"></strong></p>
+    </main>
+
+    <footer>
+        <p>Controlador de Gastos</p>
+    </footer>
+</body>
+</html>

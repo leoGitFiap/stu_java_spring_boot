@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Novo gasto | Controlador de Gastos</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="module" src="js/expense-form.js"></script>
+</head>
+<body>
+    <header>
+        <p class="logo">Controlador de Gastos</p>
+        <nav>
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="expenses.html">Gastos</a></li>
+                <li><a href="expense-form.html" aria-current="page">Novo gasto</a></li>
+                <li><a href="expense-detail.html">Buscar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Novo gasto</h1>
+
+        <div id="feedback" role="status"></div>
+
+        <form id="expense-form">
+            <label for="description">Descrição</label>
+            <input type="text" id="description" name="description" required>
+
+            <label for="amount">Valor</label>
+            <input type="number" id="amount" name="amount" min="0.01" step="0.01" required>
+
+            <label for="date">Data</label>
+            <input type="date" id="date" name="date">
+
+            <label for="category">Categoria</label>
+            <input type="text" id="category" name="category">
+
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>Controlador de Gastos</p>
+    </footer>
+</body>
+</html>

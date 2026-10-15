@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.project.expenses.repository.ExpenseRepository;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import br.com.project.expenses.model.ExpenseModel;
 
@@ -26,7 +25,7 @@ import br.com.project.expenses.services.ExpenseService;
 
 
 @RestController
-@RequestMapping("/expenses")
+@RequestMapping("/api/expenses")
 public class ExpenseController {
 
     // ALTERADO: campos final, injetados pelo construtor
@@ -52,44 +51,26 @@ public class ExpenseController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getExpense(@PathVariable("id") Long id) {
-        try {
-            ExpenseModel expenseModel = expenseService.readExpenseById(id);
-            return new ResponseEntity<>(expenseModel, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-        }
+    public ExpenseModel getExpense(@PathVariable("id") Long id) {
+        return expenseService.readExpenseById(id);
     }
 
     @PostMapping
-    public ResponseEntity<Object> postExpense(@Valid @RequestBody ExpenseModel expenseModel) {
-        try {
-            ExpenseModel expense = expenseService.addExpense(expenseModel);
-            return new ResponseEntity<>(expense, HttpStatus.CREATED); // ALTERADO: retorna o objeto salvo
-        } catch (IllegalArgumentException exception) {
-            return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<ExpenseModel> postExpense(@Valid @RequestBody ExpenseModel expenseModel) {
+        ExpenseModel expense = expenseService.addExpense(expenseModel);
+        return ResponseEntity.status(HttpStatus.CREATED).body(expense); // ALTERADO: retorna o objeto salvo
     }
 
     // ALTERADO: "expenses/{id}" virou "/{id}"
     @PutMapping("/{id}")
-    public ResponseEntity<Object> putExpense(@PathVariable("id") Long id, @Valid @RequestBody ExpenseModel expense) {
-        try {
-            ExpenseModel expenseModel = expenseService.updateExpense(id, expense);
-            return new ResponseEntity<>(expenseModel, HttpStatus.OK);
-        } catch (EntityNotFoundException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-        }
+    public ExpenseModel putExpense(@PathVariable("id") Long id, @Valid @RequestBody ExpenseModel expense) {
+        return expenseService.updateExpense(id, expense);
     }
 
     // ALTERADO: "/expense/{id}" virou "/{id}", e foi adicionado o @PathVariable
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteExpense(@PathVariable("id") Long id) {
-        try {
-            expenseService.deleteExpenseById(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (EntityNotFoundException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<Void> deleteExpense(@PathVariable("id") Long id) {
+        expenseService.deleteExpenseById(id);
+        return ResponseEntity.noContent().build();
     }
 }
